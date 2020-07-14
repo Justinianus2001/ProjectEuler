@@ -2,7 +2,7 @@
 using namespace std;
 
 inline bool isPrime(long long num){
-	if(num == 2 || num == 3)					return true;
+	if(num == 2 || num == 3)			return true;
 	if(num <= 1 || !(num % 2) || !(num % 3))	return false;
 	for(long long idx = 5; idx * idx <= num; idx += 6)
 		if(!(num % idx) || !(num % (idx + 2)))	return false;
@@ -15,7 +15,7 @@ int main(){
 	for(long long idx = 1; idx * idx <= inp; idx ++)
 		if(!(inp % idx)){
 			if(isPrime(inp / idx))	ans = max(ans, inp / idx);
-			if(isPrime(idx))		ans = max(ans, idx);
+			if(isPrime(idx))	ans = max(ans, idx);
 		}
 	cout << ans;
 	return 0;
