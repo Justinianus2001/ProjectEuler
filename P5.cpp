@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-long long __gcd(long long lhs, long long rhs){
+inline long long __gcd(long long lhs, long long rhs){
 	if(!rhs)	return lhs;
 	return __gcd(rhs, lhs % rhs);
 }
