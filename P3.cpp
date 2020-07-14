@@ -15,7 +15,7 @@ int main(){
 	for(long long idx = 1; idx * idx <= inp; idx ++)
 		if(!(inp % idx)){
 			if(isPrime(inp / idx))	ans = max(ans, inp / idx);
-			if(isPrime(idx))		ans = max(ans, idx);
+			if(isPrime(idx))	ans = max(ans, idx);
 		}
 	cout << ans;
 	return 0;
