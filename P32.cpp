@@ -2,7 +2,7 @@
 #include <map>
 using namespace std;
 
-inline bool checkPandigital(int mulplicand, int mulplier, int product, int num){
+inline bool isPandigital(int mulplicand, int mulplier, int product, int num){
 	int mp[num + 1] = {};
 	while(mulplicand)
 		if(mulplicand % 10 > num || mp[mulplicand % 10] ++)	return false;
@@ -32,7 +32,7 @@ int main(){
 	cin >> inp;
 	for(int idx1 = 1; log10(idx1) < inp / 2; idx1 ++)
 		for(int idx2 = idx1 + 1; log10(idx1) + log10(idx2) + log10(idx1 * idx2) <= inp; idx2 ++)
-			if(checkPandigital(idx1, idx2, idx1 * idx2, inp) && !mp[idx1 * idx2])
+			if(isPandigital(idx1, idx2, idx1 * idx2, inp) && !mp[idx1 * idx2])
 				ans += idx1 * idx2, mp[idx1 * idx2] = true;
 	cout << ans;
 	return 0;
