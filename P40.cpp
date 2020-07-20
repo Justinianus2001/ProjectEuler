@@ -12,8 +12,7 @@ int main(){
 	sort(begin(list), end(list));
 	for(int idx = 0; champernowne.length() <= list.back(); idx ++)
 		champernowne += to_string(idx);
-	for(int val: list)
-		ans *= champernowne[val] - '0';
+	for(int val: list)	ans *= champernowne[val] - '0';
 	cout << ans;
 	return 0;
 }
