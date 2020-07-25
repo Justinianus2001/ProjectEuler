@@ -1,7 +1,7 @@
-#include <iostream>
-#include <vector>
 #include <algorithm>
+#include <iostream>
 #include <map>
+#include <vector>
 using namespace std;
 
 inline int pow(int base, int exp){
@@ -48,5 +48,5 @@ int main(){
 //	Time:	O(?)
 //	Input:	4
 //	Output:	148748178147
-//			296962999629
+//		296962999629
 //	Lang:	C++
