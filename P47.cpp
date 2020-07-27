@@ -4,10 +4,10 @@ using namespace std;
 int cntDiv[10000000];
 
 inline void sieve(int num){
-	for(int i = 2; i <= num; i += (i != 2) + 1)
-		if(!cntDiv[i])
-			for(int j = i; j <= num; j += i)
-				cntDiv[j] ++;
+	for(int idx1 = 2; idx1 <= num; idx1 += (idx1 != 2) + 1)
+		if(!cntDiv[idx1])
+			for(int idx2 = idx1; idx2 <= num; idx2 += idx1)
+				cntDiv[idx2] ++;
 }
 
 int main(){
