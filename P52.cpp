@@ -10,9 +10,9 @@ inline int log10(int num){
 }
 
 inline int compare(int lhs, int rhs){
-	string l = to_string(lhs), r = to_string(rhs);
-	sort(begin(l), end(l)), sort(begin(r), end(r));
-	return l == r;
+	string left = to_string(lhs), right = to_string(rhs);
+	sort(begin(left), end(left)), sort(begin(right), end(right));
+	return left == right;
 }
 
 int main(){
