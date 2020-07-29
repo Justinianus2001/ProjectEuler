@@ -9,7 +9,7 @@ inline int log10(int num){
 	return ans;
 }
 
-inline int compare(int lhs, int rhs){
+inline bool compare(int lhs, int rhs){
 	string left = to_string(lhs), right = to_string(rhs);
 	sort(begin(left), end(left)), sort(begin(right), end(right));
 	return left == right;
