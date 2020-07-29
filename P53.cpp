@@ -18,7 +18,7 @@ int main(){
 }
 //	Title:	Problem 53 - Combinatoric selections
 //	URL:	https://projecteuler.net/problem=53
-//	Time:	O(?)
+//	Time:	O(n*(n+1)/2)
 //	Input:	100 1000000
 //	Output:	4075
 //	Lang:	C++
