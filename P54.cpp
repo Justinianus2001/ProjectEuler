@@ -48,7 +48,7 @@ int main(){
 				for(int idx2 = 0; idx2 < 4; idx2 ++)
 					if(mp[idx1][idx2])	suit[idx2] ++, cnt[idx1] ++;
 				switch(cnt[idx1]){
-					case 2:		cntPair ++;				break;
+					case 2:		cntPair ++;		break;
 					case 3:		isThreeOfAKind = true;	break;
 					case 4:		isFourOfAKind = true;
 				}
@@ -61,15 +61,15 @@ int main(){
 					if(cnt[idx2])	combo ++;
 				if(combo == 5)		isStraight = true;
 			}
-			if(isStraight && isFlush)			val[turn] = 9;
-			else if(isFourOfAKind)				val[turn] = 8;
+			if(isStraight && isFlush)		val[turn] = 9;
+			else if(isFourOfAKind)			val[turn] = 8;
 			else if(isThreeOfAKind && cntPair)	val[turn] = 7;
-			else if(isFlush)					val[turn] = 6;
-			else if(isStraight)					val[turn] = 5;
-			else if(isThreeOfAKind)				val[turn] = 4;
-			else if(cntPair == 2)				val[turn] = 3;
-			else if(cntPair)					val[turn] = 2;
-			else								val[turn] = 1;
+			else if(isFlush)			val[turn] = 6;
+			else if(isStraight)			val[turn] = 5;
+			else if(isThreeOfAKind)			val[turn] = 4;
+			else if(cntPair == 2)			val[turn] = 3;
+			else if(cntPair)			val[turn] = 2;
+			else					val[turn] = 1;
 		}
 		if(val[0] > val[1])			ans ++;
 		else if(val[0] == val[1])
