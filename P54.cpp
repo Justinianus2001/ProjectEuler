@@ -74,7 +74,7 @@ int main(){
 		if(val[0] > val[1])			ans ++;
 		else if(val[0] == val[1])
 			switch(val[0]){
-				case 1:
+				case 1:	case 5:	case 6:	case 9:
 					sort(player[0], player[0] + 5, cmpHighCard),
 					sort(player[1], player[1] + 5, cmpHighCard);
 					for(int idx = 0; idx < 5; idx ++)
@@ -132,11 +132,6 @@ int main(){
 									swap(player[1][idx2], player[1][1]),
 									swap(player[1][idx3], player[1][2]);
 							}
-					if(player[0][0].first > player[1][0].first)		ans ++;
-					break;
-				case 5:	case 6:	case 9:
-					sort(player[0], player[0] + 5, cmpHighCard),
-					sort(player[1], player[1] + 5, cmpHighCard);
 					if(player[0][0].first > player[1][0].first)		ans ++;
 					break;
 				case 8:
