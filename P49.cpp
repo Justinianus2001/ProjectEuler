@@ -14,7 +14,7 @@ inline int pow(int base, int exp){
 }
 
 inline bool isPrime(int num){
-	if(num == 2 || num == 3)					return true;
+	if(num == 2 || num == 3)			return true;
 	if(num <= 1 || !(num % 2) || !(num % 3))	return false;
 	for(int idx = 5; idx * idx <= num; idx += 6)
 		if(!(num % idx) || !(num % (idx + 2)))	return false;
