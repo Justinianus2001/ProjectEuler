@@ -54,8 +54,8 @@ inline long long pow(long long base, long long exp, long long MOD){
 //	Miller-Rabin-test
 inline bool isPrime(long long p){
 	int bitmaskPrimes2to31 = (1 <<  2) | (1 <<  3) | (1 <<  5) | (1 <<  7)
-							| (1 << 11) | (1 << 13) | (1 << 17) | (1 << 19)
-							| (1 << 23) | (1 << 29);
+				| (1 << 11) | (1 << 13) | (1 << 17) | (1 << 19)
+				| (1 << 23) | (1 << 29);
 	if(p < 31)	return bitmaskPrimes2to31 & (1 << p);
 	if(!(p % 2) || !(p % 3) || !(p % 5) || !(p % 7)
 	|| !(p % 11) || !(p % 13) || !(p % 17))		return false;
@@ -67,25 +67,25 @@ inline bool isPrime(long long p){
 	int TestAgainst4[] = {2, 13, 23, 1662803, STOP};
 	int TestAgainst7[] = {2, 325, 9375, 28178, 450775, 9780504, 1795265022, STOP};
 	int* testAgainst = TestAgainst7;
-	if(p < 5329)					testAgainst = TestAgainst1;
-	else if(p < 9080191)			testAgainst = TestAgainst2;
-	else if(p < 4759123141ULL)		testAgainst = TestAgainst3;
+	if(p < 5329)			testAgainst = TestAgainst1;
+	else if(p < 9080191)		testAgainst = TestAgainst2;
+	else if(p < 4759123141ULL)	testAgainst = TestAgainst3;
 	else if(p < 1122004669633ULL)	testAgainst = TestAgainst4;
 	long long d = (p - 1) >> 1;
 	int shift = 0;
 	while((d & 1) == 0)		shift ++, d >>= 1;
 	do{
-    	long long x = pow(*testAgainst ++, d, p);
-    	if(x == 1 || x == p - 1)	continue;
-    	bool maybePrime = false;
-    	for(int r = 0; r < shift; r ++){
+    		long long x = pow(*testAgainst ++, d, p);
+    		if(x == 1 || x == p - 1)	continue;
+		bool maybePrime = false;
+		for(int r = 0; r < shift; r ++){
 			x = pow(x, 2, p);
 			if(x == 1)		return false;
 			if(x == p - 1){
         		maybePrime = true;
 				break;
 			}
-    	}
+    		}
 		if(!maybePrime)		return false;
 	}while(*testAgainst != STOP);
 	return true;
@@ -120,8 +120,8 @@ int main(){
 		for(int idx2 = idx1 + 1; idx2 < primes.size(); idx2 ++)
 			if(isPrime(mergeNum(primes[idx1], primes[idx2]))
 			&& isPrime(mergeNum(primes[idx2], primes[idx1])))
-				edge[primes[idx1]].push_back(primes[idx2]),
-				edge[primes[idx2]].push_back(primes[idx1]);
+			edge[primes[idx1]].push_back(primes[idx2]),
+			edge[primes[idx2]].push_back(primes[idx1]);
 	cin >> inp;
 	for(int prime: primes)
 		visited[prime] = true,
