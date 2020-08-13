@@ -24,7 +24,7 @@ inline vector<int> sumBig(vector<int> num1, vector<int> num2){
 
 int main(){
 	vector<int> numerator = {2},
-				denominator = {1};
+		denominator = {1};
 	int inp;	cin >> inp;
 	for(int idx = 2; idx <= inp; idx ++){
 		int a = (!(idx % 3) ? (idx / 3) * 2 : 1);
