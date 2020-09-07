@@ -31,7 +31,7 @@ int main(){
 		int mn, start = 0, sum;
 		for(int idx = 0; idx < numGon * 2; idx ++)
 			if(idx < numGon)	core[idx] = v[idx];
-			else				edge[idx - numGon] = v[idx];
+			else			edge[idx - numGon] = v[idx];
 		sum = edge[0] + core[0] + core[1], mn = edge[0];
 		for(int idx = 1; idx < numGon; idx ++){
 			if(edge[idx] + core[idx] + core[(idx + 1) % numGon] != sum)		goto END;
