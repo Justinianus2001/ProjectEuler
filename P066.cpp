@@ -33,7 +33,7 @@ inline vector<int> sumBig(vector<int> num1, vector<int> num2){
 }
 
 inline vector<int> mulBigAdv(vector<int> num, vector<int> base){
-	vector<int> add = {0};
+	vector<int> add = {};
 	for(int idx = 0; idx < num.size(); idx ++){
 		vector<int> cur = sumBig(mulBig(base, num[idx]), add);
 		num[idx] = cur.front(), cur.erase(begin(cur)), add = cur;
