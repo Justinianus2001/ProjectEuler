@@ -63,7 +63,7 @@ int main(){
 			numerator = 0,
 			denominator = 1;
 		vector<int> x[] = {{0}, {1}, toBig(a)},
-					y[] = {{0}, {0}, {1}};
+				y[] = {{0}, {0}, {1}};
 		while(true){
 			numerator = denominator * a - numerator,
 			denominator = (D - numerator * numerator) / denominator,
@@ -71,7 +71,7 @@ int main(){
 			x[0] = x[1], x[1] = x[2], x[2] = sumBig(mulBig(x[1], a), x[0]),
 			y[0] = y[1], y[1] = y[2], y[2] = sumBig(mulBig(y[1], a), y[0]);
 			vector<int> lhs = mulBigAdv(x[2], x[2]),
-						rhs = sumBig(mulBig(mulBigAdv(y[2], y[2]), D), toBig(1));
+					rhs = sumBig(mulBig(mulBigAdv(y[2], y[2]), D), toBig(1));
 			if(lhs == rhs)		break;
 		}
 		if(greaterBig(x[2], maxX))
