@@ -13,7 +13,7 @@ int main(){
 		int cnt = 1, temp = num;
 		while(true){
 			if(temp == 1 || temp == 2
-			|| temp == 145 || cnt > chain)	break;
+			|| temp == 145 || cnt > chain)		break;
 			if(temp == 169 || temp == 363601
 			|| temp == 1454){	cnt += 2;	break;	}
 			if(temp == 871 || temp == 45361
