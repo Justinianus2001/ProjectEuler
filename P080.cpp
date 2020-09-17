@@ -113,7 +113,7 @@ int main(){
 			divSmall(intM, decM, 2);
 			mulSmall(intM, decM, intM, decM, intM2, decM2, decDigit);
 			if(greaterOrEqualSmall(intM2, decM2, num, decCur))
-					intR = intM, decR = decM;
+				intR = intM, decR = decM;
 			else	intL = intM, decL = decM;
 		}
 		vector<int> intAns = toBig(intL), decAns = decL;
