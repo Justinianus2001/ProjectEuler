@@ -20,7 +20,8 @@ int main(){
 		length += prev[digit].size() || next[digit].size();
 	ans = string(length, '-');
 	for(int digit = 0; digit < 10; digit ++)
-		if(prev[digit].size() || next[digit].size())	ans[prev[digit].size()] = digit + '0';
+		if(prev[digit].size() || next[digit].size())
+			ans[prev[digit].size()] = digit + '0';
 	cout << ans;
 	return 0;
 }
