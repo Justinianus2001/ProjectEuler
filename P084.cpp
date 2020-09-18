@@ -32,7 +32,7 @@ int main(){
 			dice2 = (rand() % diceSide) + 1,
 			next = (cur + dice1 + dice2) % numCell;
 		if(dice1 == dice2)	cntDbl ++;
-		else		cntDbl = 0;
+		else			cntDbl = 0;
 		if(cntDbl == 3)		next = 10, cntDbl = 0;
 		for(int type = 0; type < 3; type ++)
 			if(next == CC[type]){
@@ -49,7 +49,7 @@ int main(){
 					case 3:		next = 11;		break;
 					case 4:		next = 24;		break;
 					case 5:		next = 39;		break;
-					case 6:		next = R[0];	break;
+					case 6:		next = R[0];		break;
 					case 7:
 					case 8:		next = R[(type + 1) % 3];
 							break;
