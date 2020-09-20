@@ -16,7 +16,7 @@ int main(){
 			nearest = abs(numRect - inp),
 			ans = height * width;
 		if(numRect > inp)	height --;
-		else		width ++;
+		else			width ++;
 	}
 	cout << ans;
 	return 0;
