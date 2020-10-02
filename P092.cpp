@@ -3,7 +3,6 @@
  * https://github.com/Justinianus2001/ProjectEuler
  */
 #include <iostream>
-#include <map>
 using namespace std;
 
 inline int pow(int base, int exp){
