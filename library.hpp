@@ -1032,6 +1032,29 @@ inline void sieveSumDiv(long long range) {
 	}
 }
 
+long long sudoku[9][9], resSudoku[9][9];
+inline void solveSudoku(long long curRow, long long curCol, bool square[3][3][10], bool row[9][10], bool col[9][10]) {
+	if (curRow == 9) {
+		for (long long rowIdx = 0; rowIdx < 9; rowIdx ++) {
+			for (long long colIdx = 0; colIdx < 9; colIdx ++) {
+				resSudoku[rowIdx][colIdx] = sudoku[rowIdx][colIdx];
+			}
+		}
+	} else if (sudoku[curRow][curCol]) {
+		solveSudoku(curRow + (curCol == 8), (curCol + 1) % 9, square, row, col);
+	} else {
+		for (long long num = 1; num < 10; num ++) {
+			if (!square[curRow / 3][curCol / 3][num] && !row[curRow][num] && !col[curCol][num]) {
+				square[curRow / 3][curCol / 3][num] = row[curRow][num] = col[curCol][num] = true;
+				sudoku[curRow][curCol] = num;
+				solveSudoku(curRow + (curCol == 8), (curCol + 1) % 9, square, row, col);
+				square[curRow / 3][curCol / 3][num] = row[curRow][num] = col[curCol][num] = false;
+				sudoku[curRow][curCol] = 0;
+			}
+		}
+	}
+}
+
 inline long long sumDiv(long long num) {
 	long long res = 1;
 	for (long long div = 2; div * div <= num; div ++) {
