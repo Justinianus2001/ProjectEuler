@@ -2,24 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <algorithm>
-#include <iostream>
-#include <map>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	map<string, pair<int, long long>> mp;
-	int inp;	cin >> inp;
+int main(int argc, char** argv){
+	map<string, pair<long long, long long>> mp;
+	long long perm;		cin >> perm;
 	for(long long idx = 1; ; idx ++){
-		string strNum = to_string(idx * idx * idx);
+		string strNum = to_string(getCubeVal(idx));
 		sort(begin(strNum), end(strNum));
-		if(!mp[strNum].second)	mp[strNum].second = idx * idx * idx;
-		if(++ mp[strNum].first == inp){
+		if(!mp[strNum].second)
+			mp[strNum].second = getCubeVal(idx);
+		if(++ mp[strNum].first == perm){
 			cout << mp[strNum].second;
 			break;
 		}
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 62 - Cubic permutations
 //	URL:	https://projecteuler.net/problem=62

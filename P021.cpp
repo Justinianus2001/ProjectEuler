@@ -2,27 +2,19 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <map>
-using namespace std;
+#include "library.hpp"
 
-inline int sumDiv(int num){
-	int sum = 1;
-	for(int idx = 2; idx * idx <= num; idx ++)
-		if(!(num % idx))	sum += (idx * idx == num ? idx : idx + num / idx);
-	return sum;
-}
-
-int main(){
-	map<int, int> mp;
-	int inp, ans = 0;
-	cin >> inp;
-	for(int idx = 1; idx < inp; idx ++){
-		mp[idx] = sumDiv(idx);
-		if(mp[idx] < idx && mp[mp[idx]] == idx)		ans += idx + mp[idx];
+int main(int argc, char** argv){
+	sieve(100000);
+	long long range, sum = 0, *cache;
+	cin >> range;	cache = new long long[range];
+	for(long long num = 1; num < range; num ++){
+		cache[num] = sumDiv(num, primes);
+		if(cache[num] < num && cache[cache[num]] == num)
+			sum += num + cache[num];
 	}
-	cout << ans;
-	return 0;
+	cout << sum;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 21 - Amicable numbers
 //	URL:	https://projecteuler.net/problem=21

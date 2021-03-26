@@ -2,30 +2,39 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int fact[] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880},
-		inp, chain, ans = 0;
-	cin >> inp >> chain;
-	for(int num = 1; num < inp; num ++){
-		int cnt = 1, temp = num;
-		while(true){
-			if(temp == 1 || temp == 2
-			|| temp == 145 || cnt > chain)		break;
-			if(temp == 169 || temp == 363601
-			|| temp == 1454){	cnt += 2;	break;	}
-			if(temp == 871 || temp == 45361
-			|| temp == 872 || temp == 45362){	cnt ++;		break;	}
-			int next = 0;
-			while(temp)		next += fact[temp % 10], temp /= 10;
-			temp = next, cnt ++;
+int main(int argc, char** argv){
+	long long fact[10],
+		range, chain, res = 0;
+	for(long long num = 0; num < 10; num ++)
+		fact[num] = getFact(num);
+	cin >> range >> chain;
+	long long *cache = new long long[range + 1]();
+	cache[169] = cache[363601] = cache[1454] = 3;
+	cache[871] = cache[45361] = 2;
+	cache[872] = cache[45362] = 2;
+	for(long long num = 1; num < range; num ++){
+		long long cnt = 0, temp = num;
+		vector<long long> seq = {0};
+		while(seq.back() != temp){
+			seq.push_back(temp);
+			temp = sumFactDigit(temp);
+			cnt ++;
+			if(temp < range && cache[temp]){
+				cnt += cache[temp];
+				break;
+			}
 		}
-		ans += (cnt == chain);
+		res += (cnt == chain);
+		for(long long idx = 1; idx < seq.size(); idx ++){
+			if(seq[idx] < range)
+				cache[seq[idx]] = cnt;
+			cnt --;
+		}
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 74 - Digit factorial chains
 //	URL:	https://projecteuler.net/problem=74

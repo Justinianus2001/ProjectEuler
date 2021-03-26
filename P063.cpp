@@ -2,20 +2,20 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <cmath>
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, cnt = 0;	cin >> inp;
-	for(int exp = 1; ; exp ++){
+int main(int argc, char** argv){
+	long long maxBase, res = 0;
+	cin >> maxBase;
+	for(long long exp = 1; ; exp ++){
 		bool haveNew = false;
-		for(int base = 1; base <= inp; base ++)
-			if((int)log10(powl(base, exp)) + 1 == exp)	cnt ++, haveNew = true;
+		for(long long base = 1; base <= maxBase; base ++)
+			if(bigInteger(base).pow(exp).getLog10() == exp)
+				res ++, haveNew = true;
 		if(!haveNew)	break;
 	}
-	cout << cnt;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 63 - Powerful digit counts
 //	URL:	https://projecteuler.net/problem=63

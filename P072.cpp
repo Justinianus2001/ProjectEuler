@@ -2,25 +2,20 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	long long ans = 0;
-	int inp;	cin >> inp;
-	vector<int> phi(inp + 1);
-	for(int deno = 2; deno <= inp; deno ++)
-		phi[deno] = deno;
-	for(int deno = 2; deno <= inp; deno ++){
-		if(phi[deno] == deno){
-			for(int mul = 1; deno * mul <= inp; mul ++)
-				phi[deno * mul] -= phi[deno * mul] / deno;
-		}
-		ans += phi[deno];
+int main(int argc, char** argv){
+	long long res = 0, range;	cin >> range;
+	vector<long long> phi(range + 1);
+	iota(begin(phi), end(phi), 0LL);
+	for(long long denominator = 2; denominator <= range; denominator ++){
+		if(phi[denominator] == denominator)
+			for(long long mul = 1; denominator * mul <= range; mul ++)
+				phi[denominator * mul] -= phi[denominator * mul] / denominator;
+		res += phi[denominator];
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 72 - Counting fractions
 //	URL:	https://projecteuler.net/problem=72

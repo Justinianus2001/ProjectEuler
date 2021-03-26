@@ -2,44 +2,31 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <climits>
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "library.hpp"
 
-inline vector<string> tokenize(string text, char delim){
-	vector<string> tokens;
-	int start = text.find_first_not_of(delim), end = 0;
-	while((end = text.find_first_of(delim, start)) != string::npos)
-		tokens.push_back(text.substr(start, end - start)),
-		start = text.find_first_not_of(delim, end);
-	if(start != string::npos) tokens.push_back(text.substr(start));
-	return tokens;
-}
-
-int main(){
+int main(int argc, char** argv){
 	freopen("P081.txt", "r", stdin);
-	vector<int> v[500];
-	long long dp[500][500];
-	int length = 0, width = 0;
+	vector<long long> v[500];
+	long long cache[500][500];
+	long long len = 0, width = 0;
 	string str;
 	while(cin >> str){
-		vector<string> token = tokenize(str, ',');
-		width = max(width, (int)token.size());
-		for(string num: token)	v[length].push_back(stoi(num));
-		length ++;
+		vector<string> token = tokenize(str, ",");
+		width = max(width, (long long)token.size());
+		for(string num: token)	v[len].push_back(stoi(num));
+		len ++;
 	}
-	for(int row = 0; row < length; row ++)
-		for(int col = 0; col < width; col ++)
-			dp[row][col] = LLONG_MAX;
-	dp[0][0] = v[0][0];
-	for(int row = 0; row < length; row ++)
-		for(int col = 0; col < width; col ++){
-			if(row)		dp[row][col] = min(dp[row][col], dp[row - 1][col] + v[row][col]);
-			if(col)		dp[row][col] = min(dp[row][col], dp[row][col - 1] + v[row][col]);
+	for(long long row = 0; row < len; row ++)
+		for(long long col = 0; col < width; col ++)
+			cache[row][col] = LLONG_MAX;
+	cache[0][0] = v[0][0];
+	for(long long row = 0; row < len; row ++)
+		for(long long col = 0; col < width; col ++){
+			if(row)		cache[row][col] = min(cache[row][col], cache[row - 1][col] + v[row][col]);
+			if(col)		cache[row][col] = min(cache[row][col], cache[row][col - 1] + v[row][col]);
 		}
-	cout << dp[length - 1][width - 1];
-	return 0;
+	cout << cache[len - 1][width - 1];
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 81 - Path sum: two ways
 //	URL:	https://projecteuler.net/problem=81

@@ -2,18 +2,18 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, ans = 0, val1 = 1, val2 = 2, next;
-	cin >> inp;
-	while(val2 <= inp){
-		if(!(val2 % 2))		ans += val2;
-		next = val1 + val2, val1 = val2, val2 = next;
+int main(int argc, char** argv){
+	long long range, sum = 0, prev = 1, cur = 2, next, notEven = 0;
+	cin >> range;
+	while(cur <= range){
+		if(!notEven)	sum += cur;
+		next = cur + prev, prev = cur, cur = next,
+		notEven = (notEven + 1) % 3;
 	}
-	cout << ans;
-	return 0;
+	cout << sum;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 2 - Even Fibonacci numbers
 //	URL:	https://projecteuler.net/problem=2

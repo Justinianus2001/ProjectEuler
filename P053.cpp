@@ -2,23 +2,24 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	vector<int> row;
-	int inp, lb, ans = 0;
-	cin >> inp >> lb;
-	for(int step = 0; step <= inp; step ++){
-		for(int idx = row.size() - 1; idx >= 0; idx --){
-			row[idx] += row[idx - 1];
-			if(row[idx] > lb)	row[idx] = lb + 1, ans ++;
+int main(int argc, char** argv){
+	vector<long long> row;
+	long long maxN, goal, res = 0, *isFull;
+	cin >> maxN >> goal;
+	isFull = new long long[maxN]();
+	for(long long step = 0; step <= maxN; step ++){
+		for(long long col = row.size() - 1; col > 0; col --){
+			if(isFull[col])	continue;
+			row[col] += row[col - 1];
+			if(row[col] > goal)
+				row[col] = goal + 1, res += maxN - step + 1, isFull[col] = true;
 		}
 		row.push_back(1);
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 53 - Combinatoric selections
 //	URL:	https://projecteuler.net/problem=53

@@ -2,33 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <algorithm>
-#include <iostream>
-#include <numeric>
-using namespace std;
+#include "library.hpp"
 
-inline bool isPrime(int num){
-	if(num == 2 || num == 3)			return true;
-	if(num <= 1 || !(num % 2) || !(num % 3))	return false;
-	for(int idx = 5; idx * idx <= num; idx += 6)
-		if(!(num % idx) || !(num % (idx + 2)))	return false;
-	return true;
-}
-
-int main(){
-	string form = "123456789", str;
-	int inp, ans = 0, num;
-	cin >> inp;
-	for(int idx = 1; idx <= inp; idx ++){
-		str = form.substr(0, idx);
+int main(int argc, char** argv){
+	string perm = "123456789", str;
+	int range, res = 0, num;
+	cin >> range;
+	for(int len = 1; len <= range; len ++){
+		str = perm.substr(0, len);
 		do{
-			num = stoi(str);
-			if(isPrime(num))	ans = max(ans, num);
+			num = stoll(str);
+			if(isPrime(num))	res = max(res, num);
 		}
 		while(next_permutation(begin(str), end(str)));
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 41 - Pandigital prime
 //	URL:	https://projecteuler.net/problem=41

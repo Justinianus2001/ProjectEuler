@@ -2,25 +2,20 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <cmath>
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline bool isPentagonNum(int num){
-	int val = sqrt(num * 24 + 1);
-	return val * val == num * 24 + 1 && !((val + 1) % 6);
-}
-
-int main(){
-	int val1, val2, ans = 0;
-	for(int idx1 = 1; ; idx1 ++)
-		for(int idx2 = 1; idx2 < idx1; idx2 ++){
-			val1 = idx1 * (idx1 * 3 - 1) / 2, val2 = idx2 * (idx2 * 3 - 1) / 2;
-			if(isPentagonNum(val1 - val2) && isPentagonNum(val1 + val2)){	ans = val1 - val2;	goto END;	}
+int main(int argc, char** argv){
+	long long val1, val2;
+	for(long long idx1 = 2; ; idx1 ++)
+		for(long long idx2 = 1; idx2 < idx1; idx2 ++){
+			val1 = getPentagonalVal(idx1), val2 = getPentagonalVal(idx2);
+			if(isPentagonalVal(val1 - val2) && isPentagonalVal(val1 + val2)){
+				cout << val1 - val2;
+				goto END;
+			}
 		}
 	END:;
-	cout << ans;
-	return 0;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 44 - Pentagon numbers
 //	URL:	https://projecteuler.net/problem=44

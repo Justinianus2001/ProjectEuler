@@ -2,24 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <climits>
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	long long inp, nearest = INT_MAX, 
-		ans, height, width = 1;
-	cin >> inp;		height = inp;
+int main(int argc, char** argv){
+	long long need, nearest = INT_MAX,
+		res, height, width = 1;
+	cin >> need;		height = need;
 	while(height >= width){
-		long long numRect = height * (height + 1) * width * (width + 1) / 4;
-		if(abs(numRect - inp) < nearest)
-			nearest = abs(numRect - inp),
-			ans = height * width;
-		if(numRect > inp)	height --;
+		long long numRect = getTriangularVal(height) * getTriangularVal(width);
+		if(abs(numRect - need) < nearest)
+			nearest = abs(numRect - need),
+			res = height * width;
+		if(numRect > need)	height --;
 		else			width ++;
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 85 - Counting rectangles
 //	URL:	https://projecteuler.net/problem=85

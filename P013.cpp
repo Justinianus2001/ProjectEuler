@@ -2,30 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	string str, ans;
-	int inp, length, digit, ansLength, add = 0;
-	cin >> inp >> length >> digit;
-	ans = string(length, '0'), ansLength = length;
-	while(inp --){
-		cin >> str;
-		str = string(ansLength - length, '0') + str;
-		for(int idx = ans.length() - 1; idx > -1; idx --){
-			ans[idx] += str[idx] - '0' + add, add = 0;
-			if(ans[idx] > '9')		ans[idx] -= 10, add = 1;
-		}
-		if(add)		ans = '1' + ans, add = 0;
-		ansLength = ans.length();
-	}
-	cout << ans.substr(0, digit);
-	return 0;
+int main(int argc, char** argv){
+	bigInteger sum = 0, next;
+	long long numDigits;
+	string str;			cin >> numDigits;
+	while(cin >> next)	sum += next;
+	vector<long long> vll = sum.getBigNum();
+	reverse(begin(vll), end(vll));
+	for(long long idx = 0; idx < numDigits && idx < vll.size(); idx ++)
+		cout << vll[idx];
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 13 - Large sum
 //	URL:	https://projecteuler.net/problem=13
-//	Input:	100 50 10
+//	Input:	10
 //		37107287533902102798797998220837590246510135740250
 //		46376937677490009712648124896970078050417018260538
 //		74324986199524741059474233309513058123726617309629
@@ -126,5 +118,6 @@ int main(){
 //		72107838435069186155435662884062257473692284509516
 //		20849603980134001723930671666823555245252804609722
 //		53503534226472524250874054075591789781264330331690
+//		^Z
 //	Output:	5537376230
 //	Lang:	C++

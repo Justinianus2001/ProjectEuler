@@ -2,20 +2,21 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int fact[] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880},
-		inp, sumFact, num, ans = 0;
+int main(int argc, char** argv){
+	long long inp, sumFact, num, res = 0, *fact = new long long[10]();
+	fact[0] = fact[1] = 1;
+	for(long long num = 2; num < 10; num ++)
+		fact[num] = fact[num - 1] * num;
 	cin >> inp;		inp *= fact[9];
-	for(int idx = 10; idx <= inp; idx ++){
+	for(long long idx = 3; idx <= inp; idx ++){
 		sumFact = 0, num = idx;
 		while(num)	sumFact += fact[num % 10], num /= 10;
-		if(sumFact == idx)	ans += sumFact;
+		if(sumFact == idx)	res += sumFact;
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 34 - Digit factorials
 //	URL:	https://projecteuler.net/problem=34

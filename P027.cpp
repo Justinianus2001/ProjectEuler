@@ -2,29 +2,19 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline bool isPrime(int num){
-	if(num == 2 || num == 3)			return true;
-	if(num <= 1 || !(num % 2) || !(num % 3))	return false;
-	for(int idx = 5; idx * idx <= num; idx += 6)
-		if(!(num % idx) || !(num % (idx + 2)))	return false;
-	return true;
-}
-
-int main(){
-	int inp, maxCnt = 0, cnt, ans = 0;
-	cin >> inp;
-	for(int idx1 = 2; idx1 < inp; idx1 += (idx1 != 2) + 1)
-		if(isPrime(idx1))
-			for(int idx2 = - inp + 1; idx2 < inp; idx2 ++){
-				cnt = 0;
-				for(int idx3 = 0; isPrime(idx3 * idx3 + idx3 * idx2 + idx1); idx3 ++, cnt ++);
-				if(cnt > maxCnt)	maxCnt = cnt, ans = idx1 * idx2;
-			}
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long range, N, maxN = 0, resAB;
+	cin >> range;	sieve(range);
+	for(long long A = -1; A > - range; A --)
+		for(long long B: primes){
+			N = 0;
+			while(isPrime(N * N + N * A + B))	N ++;
+			if(N > maxN)	maxN = N, resAB = A * B;
+		}
+	cout << resAB;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 27 - Quadratic primes
 //	URL:	https://projecteuler.net/problem=27

@@ -2,18 +2,15 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	long long dp[101][101] = {};
-	int inp;
-	cin >> inp;		inp ++;
-	for(int idx1 = 1; idx1 <= inp; idx1 ++)
-		for(int idx2 = 1; idx2 <= inp; idx2 ++)
-			dp[idx1][idx2] = (idx1 == 1 && idx2 == 1 ? 1 : dp[idx1 - 1][idx2] + dp[idx1][idx2 - 1]);
-	cout << dp[inp][inp];
-	return 0;
+int main(int argc, char** argv){
+	long long size, paths = 1;
+	cin >> size;
+	for(long long grid = 0; grid < size; grid ++)
+		paths = paths * (size * 2 - grid) / (grid + 1);
+	cout << paths;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 15 - Lattice paths
 //	URL:	https://projecteuler.net/problem=15

@@ -2,24 +2,21 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, cnt, maxCnt = 0, ans = 0;
-	long long num;
-	cin >> inp;
-	for(int idx = 2; idx < inp; idx ++){
-		cnt = 0, num = idx;
-		while(num != 1){
+int main(int argc, char** argv){
+	long long range, *cache, cur, cnt, best = 0, val = 1;
+	cin >> range;	cache = new long long[range]();
+	for(long long num = 2; num < range; num ++){
+		cur = num, cnt = 1;
+		while(cur >= num)
+			cur = (cur & 1 ? cur * 3 + 1 : cur / 2),
 			cnt ++;
-			if(num & 1)		num = num * 3 + 1;
-			else			num /= 2;
-		}
-		if(cnt > maxCnt)	ans = idx, maxCnt = cnt;
+		cache[num] = cnt += cache[cur];
+		if(cnt > best)	best = cnt, val = num;
 	}
-	cout << ans;
-	return 0;
+	cout << val;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 14 - Longest Collatz sequence
 //	URL:	https://projecteuler.net/problem=14

@@ -2,33 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline int __gcd(int lhs, int rhs){
-	if(!rhs)	return lhs;
-	return __gcd(rhs, lhs % rhs);
-}
-
-int main(){
-	int inp, baseX, baseY, xGcd, yGcd;
-	cin >> inp;
-	int ans = inp * inp * 3;
-	for(int xy = 1; xy <= inp; xy ++)
-		ans += min(inp - xy, xy) * 2;
-	for(int x = 2; x <= inp; x ++)
-		for(int y = 1; y < x; y ++){
-			xGcd = x / __gcd(x, y),
-			yGcd = y / __gcd(x, y),
-			baseX = xGcd, baseY = yGcd;
-			while(baseX + y <= inp && x - baseY > -1)
-				ans += 2, baseX += xGcd, baseY += yGcd;
-			baseX = xGcd, baseY = yGcd;
-			while(y - baseX > -1 && x + baseY <= inp)
-				ans += 2, baseX += xGcd, baseY += yGcd;
+int main(int argc, char** argv){
+	long long width;	cin >> width;
+	long long res = width * width * 3;
+	for(long long x = 1; x <= width; x ++){
+		res += min(width - x, x) * 2;
+		for(long long y = 1; y < x; y ++){
+			long long cntXPos = x / __gcd(x, y),
+					cntYPos = y / __gcd(x, y);
+			res += min((width - y) / cntXPos, x / cntYPos) * 2;
+			res += min(y / cntXPos, (width - x) / cntYPos) * 2;
 		}
-	cout << ans;
-	return 0;
+	}
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 91 - Right triangles with integer coordinates
 //	URL:	https://projecteuler.net/problem=91

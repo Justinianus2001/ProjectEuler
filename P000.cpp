@@ -2,15 +2,13 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	
-	return 0;
+int main(int argc, char** argv){
+	return EXIT_SUCCESS;
 }
-//	Title:
-//	URL:
+//	Title:	Problem 0
+//	URL:	https://projecteuler.net/problem
 //	Input:
 //	Output:
 //	Lang:	C++

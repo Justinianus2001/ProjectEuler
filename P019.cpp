@@ -2,32 +2,24 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline bool isLeapYear(int year){
-	return (!(year % 4) && year % 100) || !(year % 400);
-}
-
-int main(){
-	int valid[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
-		dayBegin, dayEnd, monthBegin, monthEnd, yearBegin, yearEnd, weekDay = 2, cnt = 0, flag = 0;
-	cin >> dayBegin >> monthBegin >> yearBegin >> dayEnd >> monthEnd >> yearEnd;
-	for(int day = 1, month = 1, year = 1900; ; day ++, weekDay ++){
-		if(day > valid[month] + (month == 2 && isLeapYear(year)))		day = 1, month ++;
-		if(month > 12)								month = 1, year ++;
-		if(weekDay > 8)								weekDay -= 7;
-		if(day == dayBegin && month == monthBegin && year == yearBegin)		flag = 1;
-		if(flag != 1)								continue;
-		if(day == 1 && weekDay == 8)						cnt ++;
-		if(day == dayEnd && month == monthEnd && year == yearEnd)		break;
+int main(int argc, char** argv){
+	long long monthBegin, monthEnd,
+		yearBegin, yearEnd, cntSunday = 0;
+	cin >> yearBegin >> monthBegin,
+	cin >> yearEnd >> monthEnd;
+	for(long long curMonth = monthBegin, curYear = yearBegin;
+			curMonth < monthEnd || curYear < yearEnd; curMonth ++){
+		if(curMonth > 12)	curMonth = 1, curYear ++;
+		cntSunday += getDayOfWeek(curYear, curMonth, 1) == 1;
 	}
-	cout << cnt;
-	return 0;
+	cout << cntSunday;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 19 - Counting Sundays
 //	URL:	https://projecteuler.net/problem=19
-//	Input:	1 1 1901
-//		31 12 2000
+//	Input:	1901 1
+//		2000 12
 //	Output:	171
 //	Lang:	C++

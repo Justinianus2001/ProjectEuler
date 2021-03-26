@@ -2,28 +2,27 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <map>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, ans, maxCycle = 0, remain, cnt;
-	cin >> inp;
-	for(int idx = 2; idx < inp; idx ++){
-		map<int, int> mp;
-		remain = 1, cnt = 1;
+int main(int argc, char** argv){
+	long long range, remain, cntCycle, *cache, bestDeno, maxCycle = 0;
+	cin >> range;
+	for(long long deno = 2; deno < range; deno ++){
+		cache = new long long[deno](),
+		remain = 1, cntCycle = 0;
 		while(true){
-			if(!(remain % idx))		goto NEXT;
-			remain %= idx;
-			if(mp[remain])			break;
-			mp[remain] = cnt;
-			while(remain < idx)		cnt ++, remain *= 10;
+			remain %= deno;
+			if(!remain)				goto NEXT;
+			if(cache[remain])		break;
+			cache[remain] = cntCycle;
+			while(remain < deno)	cntCycle ++, remain *= 10;
 		}
-		if(cnt - mp[remain] > maxCycle)		ans = idx, maxCycle = cnt - mp[remain];
+		if(cntCycle - cache[remain] > maxCycle)
+			bestDeno = deno, maxCycle = cntCycle - cache[remain];
 		NEXT:;
 	}
-	cout << ans;
-	return 0;
+	cout << bestDeno;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 26 - Reciprocal cycles
 //	URL:	https://projecteuler.net/problem=26

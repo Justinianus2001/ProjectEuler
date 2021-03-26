@@ -2,21 +2,14 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline long long __gcd(long long lhs, long long rhs){
-	if(!rhs)	return lhs;
-	return __gcd(rhs, lhs % rhs);
-}
-
-int main(){
-	long long ans = 1;
-	int inp;		cin >> inp;
-	for(long long idx = 2; idx <= inp; idx ++)
-		ans *= idx / __gcd(ans, idx);
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long Max, best = 1;		cin >> Max;
+	for(long long num = 2; num <= Max; num ++)
+		best *= num / __gcd(best, num);
+	cout << best;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 5 - Smallest multiple
 //	URL:	https://projecteuler.net/problem=5

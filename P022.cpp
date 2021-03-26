@@ -2,30 +2,22 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
+#include "library.hpp"
 
-int main(){
+int main(int argc, char** argv){
 	freopen("P022.txt", "r", stdin);
-	vector<string> names;
-	int start = -1, stop, ans = 0, score;
-	string inp;		cin >> inp;
-	while((start = inp.find("\"", start + 1)) != string::npos){
-		stop = inp.find("\"", start + 1);
-		names.push_back(inp.substr(start + 1, stop - start - 1));
-		start = stop;
-	}
+	long long sum = 0, score;
+	string str;		cin >> str;
+	vector<string> names = tokenize(str, "\",\"");
 	sort(begin(names), end(names));
-	for(int idx = 0; idx < names.size(); idx ++){
+	for(long long idx = 0; idx < names.size(); idx ++){
 		score = 0;
 		for(char ch: names[idx])
-			score += ch - 'A' + 1;
-		ans += score * (idx + 1);
+			score += getCharIdx(ch);
+		sum += score * (idx + 1);
 	}
-	cout << ans;
-	return 0;
+	cout << sum;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 22 - Names scores
 //	URL:	https://projecteuler.net/problem=22

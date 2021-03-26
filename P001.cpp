@@ -2,16 +2,15 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, ans = 0;
-	cin >> inp;
-	for(int idx = 3; idx < inp; idx ++)
-		if(!(idx % 3) || !(idx % 5))	ans += idx;
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long num;
+	cin >> num;		num --;
+	cout << sumMultiplesXBelowN(num, 3)
+		  + sumMultiplesXBelowN(num, 5)
+		  - sumMultiplesXBelowN(num, 15);
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 1 - Multiples of 3 and 5
 //	URL:	https://projecteuler.net/problem=1

@@ -2,25 +2,20 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline int sumDiv(int num){
-	int sum = 0;
-	for(int idx = 1; idx * idx <= num; idx ++)
-		if(!(num % idx))	sum += (idx * idx == num ? 1 : 2);
-	return sum;
-}
-
-int main(){
-	long long num = 0;
-	int inp;		cin >> inp;
-	for(int idx = 1; ; idx ++){
-		num += idx;
-		if(sumDiv(num) >= inp)	break;
-	}
-	cout << num;
-	return 0;
+int main(int argc, char** argv){
+	sieve(100000);
+	long long maxDiv, idx, D1 = 1, D2 = 1;
+	cin >> maxDiv;
+	for(idx = 2; D1 * D2 <= maxDiv; idx ++)
+		if(!(idx % 2))
+			D1 = cntDiv(idx + 1, primes);
+		else
+			D2 = cntDiv(idx / 2 + 1, primes);
+	idx --;
+	cout << getTriangularVal(idx);
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 12 - Highly divisible triangular number
 //	URL:	https://projecteuler.net/problem=12

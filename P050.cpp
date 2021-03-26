@@ -2,35 +2,25 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "library.hpp"
 
-bool isComposite[1000001];
-
-inline void sieve(int num){
-	isComposite[0] = isComposite[1] = true;
-	for(int idx1 = 2; idx1 * idx1 <= num; idx1 += (idx1 != 2) + 1)
-		if(!isComposite[idx1])
-			for(int idx2 = idx1 * idx1; idx2 <= num; idx2 += idx1)
-				isComposite[idx2] = true;
-}
-
-int main(){
-	vector<int> primes;
-	int inp, cnt = 0, maxLen = 0, val, ans = 0;
-	cin >> inp;		sieve(inp);
-	for(int idx = 0; idx < inp; idx ++)
-		if(!isComposite[idx])		primes.push_back(idx);
-	for(int base = 0; base < primes.size() - maxLen; base ++){
-		val = 0;
-		for(int cur = base; val + primes[cur] < inp; cur ++){
-			val += primes[cur];
-			if(!isComposite[val] && cur - base + 1 > maxLen)		maxLen = cur - base + 1, ans = val;
+int main(int argc, char** argv){
+	long long range, maxLen = 0, res = -1, *primeSum;
+	cin >> range;		sieve(range);
+	primeSum = new long long[range / 2]();
+	for(long long idx = 1; idx <= primes.size(); idx ++)
+		primeSum[idx] = primeSum[idx - 1] + primes[idx - 1];
+	for(long long last = 0; last < primes.size(); last ++){
+		for(long long first = last - maxLen - 1; first >= 0; first --){
+			if(primeSum[last] - primeSum[first] > range)
+				break;
+			if(binary_search(begin(primes), end(primes), primeSum[last] - primeSum[first]))
+				maxLen = last - first,
+				res = primeSum[last] - primeSum[first];
 		}
 	}
-	cout << ans;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 50 - Consecutive prime sum
 //	URL:	https://projecteuler.net/problem=50

@@ -2,21 +2,15 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline int __gcd(int lhs, int rhs){
-	if(!rhs)	return lhs;
-	return __gcd(rhs, lhs % rhs);
-}
-
-int main(){
-	int inp, ans = 0;	cin >> inp;
-	for(int nume = 2; nume <= inp; nume ++)
-		for(int deno = nume * 2 + 1; deno < min(inp + 1, nume * 3); deno ++)
-			ans += __gcd(nume, deno) == 1;
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long range, res = 0;	cin >> range;
+	for(long long numerator = 2; numerator <= range; numerator ++)
+		for(long long denominator = numerator * 2 + 1; denominator < min(range + 1, numerator * 3); denominator ++)
+			res += __gcd(numerator, denominator) == 1;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 73 - Counting fractions in a range
 //	URL:	https://projecteuler.net/problem=73

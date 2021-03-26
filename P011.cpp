@@ -2,26 +2,47 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, arr[100][100], ans = 0;
-	cin >> inp;
-	for(int idx1 = 0; idx1 < inp; idx1 ++)
-		for(int idx2 = 0; idx2 < inp; idx2 ++){
-			cin >> arr[idx1][idx2];
-			if(idx1 > 2)			ans = max(ans, arr[idx1][idx2] * arr[idx1 - 1][idx2] * arr[idx1 - 2][idx2] * arr[idx1 - 3][idx2]);
-			if(idx2 > 2)			ans = max(ans, arr[idx1][idx2] * arr[idx1][idx2 - 1] * arr[idx1][idx2 - 2] * arr[idx1][idx2 - 3]);
-			if(idx1 > 2 && idx2 > 2)	ans = max(ans, arr[idx1][idx2] * arr[idx1 - 1][idx2 - 1] * arr[idx1 - 2][idx2 - 2] * arr[idx1 - 3][idx2 - 3]);
-			if(idx1 > 2 && idx2 < inp - 3)	ans = max(ans, arr[idx1][idx2] * arr[idx1 - 1][idx2 + 1] * arr[idx1 - 2][idx2 + 2] * arr[idx1 - 3][idx2 + 3]);
+int main(int argc, char** argv){
+	long long size, chain, **grid, best = 0, res;
+	cin >> size >> chain;	grid = new long long*[size];
+	for(long long row = 0; row < size; row ++){
+		grid[row] = new long long[size];
+		for(long long col = 0; col < size; col ++){
+			cin >> grid[row][col];
+			if(row + 2 > chain){
+				res = 1;
+				for(long long idx = 0; idx < chain; idx ++)
+					res *= grid[row - idx][col];
+				best = max(best, res);
+			}
+			if(col + 2 > chain){
+				res = 1;
+				for(long long idx = 0; idx < chain; idx ++)
+					res *= grid[row][col - idx];
+				best = max(best, res);
+			}
+			if(row + 2 > chain && col + 2 > chain){
+				res = 1;
+				for(long long idx = 0; idx < chain; idx ++)
+					res *= grid[row - idx][col - idx];
+				best = max(best, res);
+			}
+			if(row + 2 > chain && col < size - chain + 1){
+				res = 1;
+				for(long long idx = 0; idx < chain; idx ++)
+					res *= grid[row - idx][col + idx];
+				best = max(best, res);
+			}
 		}
-	cout << ans;
-	return 0;
+	}
+	cout << best;
+	return EXIT_SUCCESS;
 }
-//	Title:	Problem 11 - Largest product in arr grid
+//	Title:	Problem 11 - Largest product in a grid
 //	URL:	https://projecteuler.net/problem=11
-//	Input:	20
+//	Input:	20 4
 //		08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 //		49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 //		81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65

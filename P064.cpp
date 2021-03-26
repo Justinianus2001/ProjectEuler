@@ -2,26 +2,25 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <cmath>
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, cnt = 0;	cin >> inp;
-	for(int num = 2; num <= inp; num ++){
-		int root = sqrt(num),
+int main(int argc, char** argv){
+	long long range, res = 0;
+	cin >> range;
+	for(long long num = 2; num <= range; num ++){
+		long long root = sqrt(num),
 			numerator = 0, denominator = 1,
-			a = root, cntPeriod = 0;
+			A = root, cntPeriod = 0;
 		if(root * root == num)	continue;
-		while(a != root * 2)
-			numerator = denominator * a - numerator,
+		while(A != root * 2)
+			numerator = denominator * A - numerator,
 			denominator = (num - numerator * numerator) / denominator,
-			a = (root + numerator) / denominator,
+			A = (root + numerator) / denominator,
 			cntPeriod ++;
-		cnt += cntPeriod % 2;
+		res += cntPeriod % 2;
 	}
-	cout << cnt;
-	return 0;
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 64 - Odd period square roots
 //	URL:	https://projecteuler.net/problem=64

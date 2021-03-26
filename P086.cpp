@@ -2,23 +2,23 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <cmath>
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, cnt = 0, len;
-	cin >> inp;
-	for(len = 1; ; len ++){
-		for(int widHei = 2; widHei <= len * 2; widHei ++){
-			double Sqrt = sqrt(widHei * widHei + len * len);
-			if(Sqrt == (int)Sqrt)
-				cnt += widHei <= len ? widHei / 2 : len - (widHei + 1) / 2 + 1;
+int main(int argc, char** argv){
+	long long range, cnt = 0;
+	cin >> range;
+	for(long long len = 1; ; len ++){
+		for(long long area = 2; area <= len * 2; area ++){
+			long double Sqrt = sqrt(area * area + len * len);
+			if(Sqrt == (long long)Sqrt)
+				cnt += area <= len ? area / 2 : len - (area + 1) / 2 + 1;
 		}
-		if(cnt >= inp)	break;
+		if(cnt >= range){
+			cout << len;
+			break;
+		}
 	}
-	cout << len;
-	return 0;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 86 - Cuboid route
 //	URL:	https://projecteuler.net/problem=86

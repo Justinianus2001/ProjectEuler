@@ -2,34 +2,18 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <algorithm>
-using namespace std;
+#include "library.hpp"
 
-inline int log10(int num){
-	int ans = 0;
-	do num /= 10, ans ++;
-	while(num);
-	return ans;
-}
-
-inline bool compare(int lhs, int rhs){
-	string left = to_string(lhs), right = to_string(rhs);
-	sort(begin(left), end(left)), sort(begin(right), end(right));
-	return left == right;
-}
-
-int main(){
-	int inp, ok = 0;	cin >> inp;
-	for(int num = 1; ; num ++){
-		if(log10(num) != log10(num * inp))		continue;
-		ok = 1;
-		for(int mul = 2; mul <= inp; mul ++)
-			if(!compare(num, num * mul)){		ok = 0;	break;		}
-		if(ok){		cout << num;	break;		}
+int main(int argc, char** argv){
+	long long range;	cin >> range;
+	for(long long num = 1; ; num ++){
+		if(log10(num) != log10(num * range))		continue;
+		bool ok = true;
+		for(long long mul = 2; mul <= range; mul ++)
+			if(!isPermutation(num, num * mul)){	ok = false;	break;	}
+		if(ok){	cout << num;	break;	}
 	}
-	END:;
-	return 0;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 52 - Permuted multiples
 //	URL:	https://projecteuler.net/problem=52

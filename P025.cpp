@@ -2,25 +2,12 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	string val1 = "0", val2 = "1", val3;
-	int inp, add, cnt = 1;
-	cin >> inp;
-	while(inp != val2.length()){
-		val3 = val1, val1 = val2, add = 0;
-		if(val3.length() != val2.length())	val3 = '0' + val3;
-		for(int idx = val3.length() - 1; idx > -1; idx --){
-			val2[idx] += val3[idx] - '0' + add, add = 0;
-			if(val2[idx] > '9')	val2[idx] -= 10, add = 1;
-		}
-		if(add)		val2 = '1' + val2;
-		cnt ++;
-	}
-	cout << cnt;
-	return 0;
+int main(int argc, char** argv){
+	long long digits;	cin >> digits;
+	cout << (digits == 1 ? 1 : ceil((log(10) * (digits - 1) + log(5) / 2) / log(PHI)));
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 25 - 1000-digit Fibonacci number
 //	URL:	https://projecteuler.net/problem=25

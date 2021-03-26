@@ -2,18 +2,20 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <algorithm>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, cnt = 0;
-	string str;
-	cin >> str >> inp;
-	do if(++ cnt == inp)	break;
-	while(next_permutation(begin(str), end(str)));
-	cout << str;
-	return 0;
+int main(int argc, char** argv){
+	long long numPerm;
+	string str, ans;
+	cin >> str >> numPerm;
+	numPerm = (numPerm - 1) % getFact(str.length());
+	sort(begin(str), end(str));
+	while(str.length()){
+		long long fact = getFact(str.length() - 1), pos = numPerm / fact;
+		ans += str[pos], numPerm %= fact, str.erase(pos, 1);
+	}
+	cout << ans;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 24 - Lexicographic permutations
 //	URL:	https://projecteuler.net/problem=24

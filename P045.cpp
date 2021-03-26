@@ -2,31 +2,18 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline long long getTriangleVal(long long num){
-	return num * (num + 1) / 2;
-}
-
-inline long long getPentagonVal(long long num){
-	return num * (num * 3 - 1) / 2;
-}
-
-inline long long getHexagonVal(long long num){
-	return num * (num * 2 - 1);
-}
-
-int main(){
-	long long inp;		cin >> inp;
-	for(long long idx1 = inp + 1, idx2 = inp + 1, idx3 = inp + 1; ; idx3 ++){
-		while(getTriangleVal(idx1) < getHexagonVal(idx3))	idx1 ++;
-		while(getPentagonVal(idx2) < getHexagonVal(idx3))	idx2 ++;
-		if(getTriangleVal(idx1) == getPentagonVal(idx2) && getPentagonVal(idx2) == getHexagonVal(idx3)){
-			cout << getHexagonVal(idx3);	break;
+int main(int argc, char** argv){
+	long long start;		cin >> start;
+	for(long long idx1 = start + 1, idx2 = start + 1, idx3 = start + 1; ; idx3 ++){
+		while(getTriangularVal(idx1) < getHexagonalVal(idx3))	idx1 ++;
+		while(getPentagonalVal(idx2) < getHexagonalVal(idx3))	idx2 ++;
+		if(getTriangularVal(idx1) == getPentagonalVal(idx2) && getPentagonalVal(idx2) == getHexagonalVal(idx3)){
+			cout << getHexagonalVal(idx3);	break;
 		}
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 45 - Triangular, pentagonal, and hexagonal
 //	URL:	https://projecteuler.net/problem=45

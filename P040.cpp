@@ -2,23 +2,17 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <algorithm>
-#include <iostream>
-#include <vector>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	vector<int> list;
-	string champernowne = "";
-	int inp, num, ans = 1;
-	cin >> inp;
-	while(inp --)	cin >> num, list.push_back(num);
-	sort(begin(list), end(list));
-	for(int idx = 0; champernowne.length() <= list.back(); idx ++)
-		champernowne += to_string(idx);
-	for(int val: list)	ans *= champernowne[val] - '0';
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long num, idx, res = 1;
+	cin >> num;
+	while(num --){
+		cin >> idx;
+		res *= getChampernowneDigit(idx);
+	}
+	cout << res;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 40 - Champernowne's constant
 //	URL:	https://projecteuler.net/problem=40

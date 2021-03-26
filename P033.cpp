@@ -2,37 +2,32 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-inline int pow(int base, int exp){
-	int ans = 1;
-	while(exp){
-		if(exp & 1)		ans *= base;
-		exp /= 2, base *= base;
-	}
-	return ans;
-}
-
-inline int __gcd(int lhs, int rhs){
-	if(!rhs)	return lhs;
-	return __gcd(rhs, lhs % rhs);
-}
-
-int main(){
-	int inp, numerator = 1, denominator = 1, ans = 0;
-	cin >> inp;
-	for(int idx1 = pow(10, inp - 1); idx1 < pow(10, inp); idx1 ++){
-		if(idx1 / 10 == idx1 % 10)		continue;
-		for(int idx2 = idx1 + 1; idx2 < pow(10, inp); idx2 ++){
-			if(idx2 / 10 == idx2 % 10)	continue;
-			if((double)idx1 / idx2 == (double)(idx1 / 10) / (idx2 % 10) && idx1 % 10 == idx2 / 10)
-				numerator *= idx1, denominator *= idx2;
+int main(int argc, char** argv){
+	fraction mul(1, 1);
+	long long digits;	cin >> digits;
+	for(long long numerator = pow(10, digits - 1); numerator < pow(10, digits); numerator ++){
+		vector<long long> num = getVector(numerator);
+		for(long long denominator = numerator + 1; denominator < pow(10, digits); denominator ++){
+			vector<long long> den = getVector(denominator);
+			bool ok = false;
+			for(long long digit = 1; digit < 10; digit ++){
+				vector<long long> num1 = num, num2 = den;
+				num1.erase(remove(begin(num1), end(num1), digit), end(num1)),
+				num2.erase(remove(begin(num2), end(num2), digit), end(num2));
+				fraction l(numerator, denominator), r(getNum(num1), getNum(num2));
+				if(getNum(num1) != numerator && getNum(num2) != denominator && l == r)
+					ok = true;
+			}
+			if(ok){
+				fraction frac(numerator, denominator);
+				mul *= frac;
+			}
 		}
 	}
-	ans = denominator / __gcd(numerator, denominator);
-	cout << ans;
-	return 0;
+	cout << mul.getDenominator();
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 33 - Digit cancelling fractions
 //	URL:	https://projecteuler.net/problem=33

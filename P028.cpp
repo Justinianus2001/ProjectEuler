@@ -2,17 +2,16 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int main(){
-	int inp, ans = 1;
-	cin >> inp;		inp /= 2;
-	for(int idx = inp - 1; idx <= inp + 1; idx ++)
-		ans *= !(idx % 3) ? idx / 3 : idx;
-	ans += inp * inp * inp * 5 + inp * inp * 10 + inp * 9 + 1;
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	long long size, sum, val1, val2, val3;
+	cin >> size;		size /= 2;
+	val1 = size - 1, val2 = size, val3 = size + 1;
+	!(val1 % 3) ? val1 /= 3 : !(val2 % 3) ? val2 /= 3 : val3 /= 3;
+	sum = val1 * val2 * val3 + size * size * size * 5 + size * size * 10 + size * 9 + 1;
+	cout << sum;
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 28 - Number spiral diagonals
 //	URL:	https://projecteuler.net/problem=28

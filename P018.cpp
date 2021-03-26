@@ -2,32 +2,27 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-using namespace std;
+#include "library.hpp"
 
-int arr[100][100];
-
-inline int sum(int idx1, int idx2){
-	if(!idx1)		return arr[0][0];
-	if(!idx2)		return arr[idx1][idx2] + sum(idx1 - 1, idx2);
-	if(idx1 == idx2)	return arr[idx1][idx2] + sum(idx1 - 1, idx2 - 1);
-	return arr[idx1][idx2] + max(sum(idx1 - 1, idx2), sum(idx1 - 1, idx2 - 1));
-}
-
-int main(){
-	int inp, ans = 0;
-	cin >> inp;
-	for(int idx1 = 0; idx1 < inp; idx1 ++)
-		for(int idx2 = 0; idx2 <= idx1; idx2 ++)	cin >> arr[idx1][idx2];
-	for(int idx = 0; idx < inp; idx ++)
-		ans = max(ans, sum(inp, idx));
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	vector<long long> cur, next;
+	long long *arr;
+	for(long long row = 1; ; row ++){
+		arr = new long long[row],
+		next.clear();
+		for(int col = 0; col < row; col ++){
+			if(!(cin >> arr[col]))		goto END;
+			next.push_back(max((col ? cur[col - 1] : 0), (col != cur.size() ? cur[col] : 0)) + arr[col]);
+		}
+		cur = next;
+	}
+	END:;
+	cout << *max_element(begin(cur), end(cur));
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 18 - Maximum path sum I
 //	URL:	https://projecteuler.net/problem=18
-//	Input:	15
-//		75
+//	Input:	75
 //		95 64
 //		17 47 82
 //		18 35 87 10
@@ -42,5 +37,6 @@ int main(){
 //		91 71 52 38 17 14 91 43 58 50 27 29 48
 //		63 66 04 68 89 53 67 30 73 16 69 87 40 31
 //		04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
+//		^Z
 //	Output:	1074
 //	Lang:	C++

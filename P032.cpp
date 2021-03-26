@@ -2,44 +2,32 @@
  * Copyright (c) Justinianus
  * https://github.com/Justinianus2001/ProjectEuler
  */
-#include <iostream>
-#include <map>
-using namespace std;
+#include "library.hpp"
 
-inline bool isPandigital(int mulplicand, int mulplier, int product, int num){
-	int mp[num + 1] = {};
-	while(mulplicand)
-		if(mulplicand % 10 > num || mp[mulplicand % 10] ++)	return false;
-		else	mulplicand /= 10;
-	while(mulplier)
-		if(mulplier % 10 > num || mp[mulplier % 10] ++)		return false;
-		else	mulplier /= 10;
-	while(product)
-		if(product % 10 > num || mp[product % 10] ++)		return false;
-		else	product /= 10;
-	if(mp[0])		return false;
-	for(int i = 1; i <= num; i ++)
-		if(!mp[i])	return false;
-	return true;
-}
-
-inline int log10(int num){
-	int ans = 0;
-	do num /= 10, ans ++;
-	while(num);
-	return ans;
-}
-
-int main(){
-	map<int, bool> mp;
-	int inp, ans = 0;
-	cin >> inp;
-	for(int idx1 = 1; log10(idx1) < inp / 2; idx1 ++)
-		for(int idx2 = idx1 + 1; log10(idx1) + log10(idx2) + log10(idx1 * idx2) <= inp; idx2 ++)
-			if(isPandigital(idx1, idx2, idx1 * idx2, inp) && !mp[idx1 * idx2])
-				ans += idx1 * idx2, mp[idx1 * idx2] = true;
-	cout << ans;
-	return 0;
+int main(int argc, char** argv){
+	vector<long long> v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+	set<long long> s;
+	long long length;	cin >> length;
+	v.resize(length);
+	do
+		for(long long lenA = 1; lenA < length; lenA ++)
+			for(long long lenB = 1; lenB < length - lenA; lenB ++){
+				long long lenC = length - lenA - lenB,
+					A = 0, B = 0, C = 0, idx = 0;
+				if(lenA > lenC || lenB > lenC)
+					break;
+				for(long long pos = 0; pos < lenA; pos ++)
+					A = A * 10 + v[idx ++];
+				for(long long pos = 0; pos < lenB; pos ++)
+					B = B * 10 + v[idx ++];
+				for(long long pos = 0; pos < lenC; pos ++)
+					C = C * 10 + v[idx ++];
+				if(A * B == C)
+					s.insert(A * B);
+			}
+	while(next_permutation(begin(v), end(v)));
+	cout << accumulate(begin(s), end(s), 0LL);
+	return EXIT_SUCCESS;
 }
 //	Title:	Problem 32 - Pandigital products
 //	URL:	https://projecteuler.net/problem=32
